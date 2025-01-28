@@ -1,38 +1,33 @@
 {
-	"name": "MonoBook",
+	"name": "MonoBookLegacy",
 	"author": [
 		"Gabriel Wicke",
 		"Isarra Yos",
 		"..."
 	],
-	"url": "https://www.mediawiki.org/wiki/Skin:MonoBook",
-	"descriptionmsg": "monobook-desc",
-	"namemsg": "skinname-monobook",
+	"url": "https://github.com/kirb/mediawiki-skins-MonoBookLegacy",
+	"descriptionmsg": "monobooklegacy-desc",
+	"namemsg": "skinname-monobooklegacy",
 	"license-name": "GPL-2.0-or-later",
 	"type": "skin",
 	"requires": {
 		"MediaWiki": ">= 1.29.0"
 	},
 	"ValidSkinNames": {
-		"monobook": "MonoBook"
+		"monobooklegacy": "MonoBookLegacy"
 	},
 	"SkinOOUIThemes": {
-		"monobook": "Apex"
-	},
-	"DefaultUserOptions": {
-		"monobook-responsive": true
+		"monobooklegacy": "Apex"
 	},
 	"Hooks": {
-		"GetPreferences": "SkinMonoBook::onGetPreferences",
-		"ResourceLoaderRegisterModules": "SkinMonoBook::registerMobileExtensionStyles"
 	},
 	"MessagesDirs": {
-		"MonoBook": [
+		"MonoBookLegacy": [
 			"i18n"
 		]
 	},
 	"ResourceModules": {
-		"skins.monobook.styles": {
+		"skins.monobooklegacy.styles": {
 			"styles": {
 				"resources/screen-common.less": {
 					"media": "screen"
@@ -41,42 +36,14 @@
 					"media": "screen"
 				}
 			}
-		},
-		"skins.monobook.responsive": {
-			"targets": [ "desktop", "mobile" ],
-			"styles": {
-				"resources/screen-common.less": {
-					"media": "screen"
-				},
-				"resources/screen-desktop.css": {
-					"media": "screen and (min-width: 551px)"
-				},
-				"resources/screen-mobile.less": {
-					"media": "screen and (max-width: 550px)"
-				}
-			}
-		},
-		"skins.monobook.mobile": {
-			"targets": [ "desktop", "mobile" ],
-			"scripts": [
-				"resources/mobile.js"
-			],
-			"styles": {
-				"resources/mobile.js.less": {
-					"media": "screen and (max-width: 550px)"
-				}
-			},
-			"dependencies": [
-				"mediawiki.util"
-			]
 		}
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "",
-		"remoteSkinPath": "MonoBook"
+		"remoteSkinPath": "MonoBookLegacy"
 	},
 	"ResourceModuleSkinStyles": {
-		"monobook": {
+		"monobooklegacy": {
 			"+mediawiki.action.view.redirectPage": "resources/skinStyles/mediawiki.action.view.redirectPage.css",
 			"+mediawiki.notification": "resources/skinStyles/mediawiki.notification.less",
 			"+oojs-ui-core.styles": "resources/skinStyles/ooui.less",
@@ -85,8 +52,8 @@
 		}
 	},
 	"AutoloadClasses": {
-		"SkinMonoBook": "includes/SkinMonoBook.php",
-		"MonoBookTemplate": "includes/MonoBookTemplate.php"
+		"SkinMonoBookLegacy": "includes/SkinMonoBook.php",
+		"MonoBookLegacyTemplate": "includes/MonoBookTemplate.php"
 	},
 	"manifest_version": 1
 }

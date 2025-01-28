@@ -24,10 +24,12 @@
  * @ingroup Skins
  */
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * @ingroup Skins
  */
-class MonoBookTemplate extends BaseTemplate {
+class MonoBookLegacyTemplate extends BaseTemplate {
 
 	/**
 	 * Template filter callback for MonoBook skin.
@@ -96,7 +98,8 @@ class MonoBookTemplate extends BaseTemplate {
 				'lang' => $this->get( 'userlang' ),
 				'dir' => $this->get( 'dir' )
 			],
-			Html::element( 'h2', [], $this->getMsg( 'navigation-heading' )->text() ) .
+			// TODO: Fix
+			// Html::element( 'h2', [], $this->getMsg( 'navigation-heading' )->text() ) .
 			$this->getCactions() .
 			$this->getBox( 'personal', $this->getPersonalTools(), 'personaltools' ) .
 			Html::rawElement( 'div', [ 'class' => 'portlet', 'id' => 'p-logo', 'role' => 'banner' ],
@@ -128,7 +131,8 @@ class MonoBookTemplate extends BaseTemplate {
 		$html .= $this->getSimpleFooter();
 		$html .= Html::closeElement( 'div' );
 
-		$html .= $this->getTrail();
+		// TODO: Fix
+		// $html .= $this->getTrail();
 
 		$html .= Html::closeElement( 'body' );
 		$html .= Html::closeElement( 'html' );
@@ -265,7 +269,10 @@ class MonoBookTemplate extends BaseTemplate {
 	protected function getSearchBox() {
 		$html = '';
 
-		if ( $this->config->get( 'UseTwoButtonsSearchForm' ) ) {
+		if ( MediaWikiServices::getInstance()
+			->getMainConfig()
+			->get( 'UseTwoButtonsSearchForm' )
+		) {
 			$optionButtons = "\u{00A0} " . $this->makeSearchButton(
 				'fulltext',
 				[ 'id' => 'mw-searchButton', 'class' => 'searchButton' ]
@@ -306,11 +313,12 @@ class MonoBookTemplate extends BaseTemplate {
 		$html = '';
 		$template = $this;
 
-		$html .= $this->getBox( 'tb', $this->getToolbox(), 'toolbox', [ 'hooks' => [
-			// Deprecated hooks
-			'MonoBookTemplateToolboxEnd' => [ &$template ],
-			'SkinTemplateToolboxEnd' => [ &$template, true ]
-		] ] );
+		// TODO: Fix?
+		// $html .= $this->getBox( 'tb', $this->getToolbox(), 'toolbox', [ 'hooks' => [
+		// 	// Deprecated hooks
+		// 	'MonoBookTemplateToolboxEnd' => [ &$template ],
+		// 	'SkinTemplateToolboxEnd' => [ &$template, true ]
+		// ] ] );
 
 		$html .= $this->deprecatedHookHack( 'MonoBookAfterToolbox', [ $template ] );
 
@@ -359,8 +367,10 @@ class MonoBookTemplate extends BaseTemplate {
 				$prependiture .= $this->makeListItem( 'uls', $contents['uls'] );
 				unset( $contents['uls'] );
 			}
-			if ( !$this->getSkin()->getUser()->isLoggedIn() &&
-				User::groupHasPermission( '*', 'edit' )
+			if ( !$this->getSkin()->getUser()->isAnon() &&
+				MediaWikiServices::getInstance()
+					->getGroupPermissionsLookup()
+					->groupHasPermission( '*', 'edit' )
 			) {
 				$prependiture .= Html::rawElement(
 					'li',
@@ -486,7 +496,8 @@ class MonoBookTemplate extends BaseTemplate {
 			Html::rawElement( 'h3', $labelOptions, $msgString ) .
 			Html::rawElement( 'div', $bodyDivOptions,
 				$contentText .
-				$this->getAfterPortlet( $name )
+				// TODO: Fix?
+				// $this->getAfterPortlet( $name )
 			)
 		);
 
@@ -527,7 +538,8 @@ class MonoBookTemplate extends BaseTemplate {
 	protected function deprecatedHookHack( $hook, $hookOptions = [] ) {
 		$hookContents = '';
 		ob_start();
-		Hooks::run( $hook, $hookOptions );
+		// TODO: Do we care?
+		// Hooks::run( $hook, $hookOptions );
 		$hookContents = ob_get_contents();
 		ob_end_clean();
 		if ( !trim( $hookContents ) ) {
